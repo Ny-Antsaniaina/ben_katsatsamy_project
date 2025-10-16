@@ -18,7 +18,7 @@ public class CreateTable {
             String face = """
                 CREATE TABLE face (
                     face_id SERIAL PRIMARY KEY,
-                    name VARCHAR(100) NOT NULL
+                    name VARCHAR NOT NULL
                 );
             """;
 
@@ -26,7 +26,7 @@ public class CreateTable {
             String users = """
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
-                    name VARCHAR(100) NOT NULL,
+                    name VARCHAR NOT NULL,
                     role role_enum NOT NULL
                 );
             """;
@@ -80,7 +80,7 @@ public class CreateTable {
             String course = """
                 CREATE TABLE course (
                     course_id SERIAL PRIMARY KEY,
-                    name VARCHAR(100) NOT NULL,
+                    name VARCHAR NOT NULL,
                     date TIMESTAMP NOT NULL,
                     teacher_id INT,
                     FOREIGN KEY (teacher_id)
@@ -98,7 +98,7 @@ public class CreateTable {
                     course_id INT NOT NULL,
                     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     status status_enum DEFAULT 'absent',
-                    verify_by VARCHAR(100),
+                    verify_by VARCHAR,
                     FOREIGN KEY (student_id)
                         REFERENCES student(std_id)
                         ON DELETE CASCADE
@@ -115,7 +115,7 @@ public class CreateTable {
                 CREATE TABLE motif (
                     motif_id SERIAL PRIMARY KEY,
                     type motif_type_enum NOT NULL,
-                    description VARCHAR(255),
+                    description VARCHAR,
                     certified BOOLEAN DEFAULT FALSE,
                     student_id INT,
                     FOREIGN KEY (student_id)
