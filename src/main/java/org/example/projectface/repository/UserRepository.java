@@ -13,7 +13,7 @@ public class UserRepository  {
     private final ConnectionToDataBase dataSource = new ConnectionToDataBase();
 
     public int saveAll(User user) {
-        String sql = "Insert into users (name , role) values (?, cast(?  as role_enum)) returning id on conflict do nothing";
+        String sql = "Insert into users (name , role) values (?, cast(?  as role_enum)) RETURNING id ;";
         try(Connection conn = dataSource.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql)){
             statement.setString(1,user.getName());

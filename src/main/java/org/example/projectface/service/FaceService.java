@@ -9,18 +9,21 @@ import java.io.File;
 
 @Service
 public class FaceService {
-    private FaceRepository faceRepository =  new FaceRepository();
-    private String folderUpLoad = "/upload/face";
+    private final FaceRepository faceRepository =  new FaceRepository();
+    private String folderUpLoad = "../../main/resources/upload/face";
 
     public Face addFace(MultipartFile file) {
         try{
             File fileFolder = new File(folderUpLoad);
             if(!fileFolder.exists()){
-                fileFolder.mkdirs();
+                boolean created = fileFolder.mkdirs();
+                if(!created){
+                    throw new RuntimeException("Failed to create folder");
+                }
             }
 
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            String filePath = fileFolder + fileName;
+            String filePath = fileFolder.getAbsolutePath() + File.separator +fileName;
 
             file.transferTo(new File(filePath));
 

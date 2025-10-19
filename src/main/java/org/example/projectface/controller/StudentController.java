@@ -14,15 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/student")
 public class StudentController {
-    private StudentRegister studentRegister =  new StudentRegister();
+    private final StudentRegister studentRegister = new StudentRegister();
 
     @PostMapping("/register")
-    public ResponseEntity<Student> insert(@RequestParam("name") String name , @RequestParam("role") Role role , @RequestParam("file")MultipartFile file){
-        try{
-            Student student = studentRegister.insertStudent(file,name, Role.valueOf(role.toValue()));
+    public ResponseEntity<Student> insert(@RequestParam("name") String name, @RequestParam("role") Role role, @RequestParam("file") MultipartFile file) {
+        try {
+            Student student = studentRegister.insertStudent(file, name, role);
             return new ResponseEntity<>(student, HttpStatus.OK);
-        }catch (Exception e){
-            throw new RuntimeException("Error in insert student" , e);
+        } catch (Exception e) {
+            throw new RuntimeException("Error in insert student", e);
         }
     }
 
