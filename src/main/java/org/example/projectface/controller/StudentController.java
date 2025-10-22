@@ -11,10 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
     private final StudentRegister studentRegister = new StudentRegister();
+    private final FaceService faceService = new FaceService();
 
     @PostMapping("/register")
     public ResponseEntity<Student> insert(@RequestParam("name") String name, @RequestParam("role") Role role, @RequestParam("file") MultipartFile file) {
@@ -23,6 +26,20 @@ public class StudentController {
             return new ResponseEntity<>(student, HttpStatus.OK);
         } catch (Exception e) {
             throw new RuntimeException("Error in insert student", e);
+        }
+    }
+
+    @PostMapping("/photo")
+    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
+        try{
+            boolean faceAccepted = faceService.reconizingFace(file);
+            if (faceAccepted) {
+                return ResponseEntity.ok("face accepted");
+            }else  {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("face not accepted");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
