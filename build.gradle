@@ -22,8 +22,7 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    mavenCentral()
 }
 
 ext {
@@ -35,7 +34,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter'
-    implementation 'org.bytedeco:javacv-platform:1.5.8'
+    implementation 'com.github.sarxos:webcam-capture:0.3.12'
+    implementation 'org.apache.commons:commons-imaging:1.0-alpha3'
+    implementation 'org.bytedeco:javacv-platform:1.5.10'
+    implementation 'org.bytedeco:opencv-platform:4.9.0-1.5.10'
     compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'

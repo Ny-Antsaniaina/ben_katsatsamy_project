@@ -17,6 +17,4 @@ public class UserService {
         user.setId(id);
         return user;
     }
-
-
 }

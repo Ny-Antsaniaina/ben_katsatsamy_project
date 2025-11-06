@@ -2,11 +2,12 @@ package org.example.projectface.repository;
 
 import org.example.projectface.database.ConnectionToDataBase;
 import org.example.projectface.entity.Face;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+@Repository
 public class FaceRepository {
     private final ConnectionToDataBase datasource = new ConnectionToDataBase();
 
